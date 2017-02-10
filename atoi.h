@@ -31,8 +31,7 @@ int atoi_5j(const char* str) {
 			return 0;
 		}
 
-		if (val == (NEG_MAX / 10) &&
-			  (*str - '0') > (NEG_MAX % 10)) {
+		if (val == (NEG_MAX / 10) && (*str - '0') > (NEG_MAX % 10)) {
 			return 0;
 		}
 
