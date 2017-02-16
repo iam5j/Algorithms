@@ -22,8 +22,37 @@ TreeNode* Max(TreeNode *node) {
     return node;
 }
 
-TreeNode* Remove(TreeNode *root, TreeNode *node) {
-    return NULL;
+TreeNode* Remove(TreeNode **root, TreeNode *node) {
+    TreeNode *y = NULL;
+    if (node->left == NULL || node->right == NULL) {
+        y = node;
+    } else {
+        y = Successor(node);
+    }
+    
+    TreeNode *x = NULL;
+    if (y->left) {
+        x = y->left;
+    } else {
+        x = y->right;
+    }
+    
+    if (x != NULL) {
+        x->parent = y->parent;
+    }
+
+    if (y->parent == NULL) {
+        *root = x;
+    } else if (y == y->parent->left) {
+        y->parent->left = x;
+    } else {
+        y->parent->right = x;
+    }
+    
+    if (y != node) {
+        node->value = y->value;
+    }
+    return y;
 }
 
 TreeNode* Successor(TreeNode *node) {
