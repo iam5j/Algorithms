@@ -45,7 +45,23 @@ namespace J5 {
     }
 
     int lcs(const std::string &lhs, const std::string &rhs) {
+        int l_len = static_cast<int>(lhs.length());
+        int r_len = static_cast<int>(rhs.length());
+        std::vector<std::vector<int>> vvi(l_len);
+        for (size_t i = 0; i < l_len; ++i) {
+            vvi[i].resize(r_len, 0);
+        }
 
+        for (size_t i = 0; i < l_len; ++i) {
+            for (size_t j = 0; j < r_len; ++j) {
+                if (lhs[i] == rhs[j]) {
+                    vvi[i][j] = vvi[i - 1][j - 1] + 1;
+                } else {
+                    vvi[i][j] == std::max<int>(vvi[i - 1][j], vvi[i][j - 1]);
+                }
+            }
+        }
+        return vvi[l_len - 1][r_len - 1];
     }
 };
 
